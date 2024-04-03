@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GitHubUsers</string>
+    <string name="name_s">Name: %s</string>
+    <string name="id_d">ID: %s</string>
+    <string name="following_count_d">Following count: %d</string>
+    <string name="followers_count_d">Followers count: %d</string>
+    <string name="email_s">Email: %s</string>
+    <string name="date_of_creating_account_s">Date of creating account: %s</string>
+    <string name="retry">RETRY</string>
+    <string name="internet_nerror">INTERNET \nERROR</string>
+</resources>

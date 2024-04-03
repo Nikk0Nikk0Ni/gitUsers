@@ -1,0 +1,49 @@
+[versions]
+agp = "8.3.1"
+kotlin = "1.9.0"
+coreKtx = "1.12.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.8.2"
+constraintlayout = "2.1.4"
+retrofit = "2.9.0"
+coroutines = "1.7.1"
+nav_vers = "2.7.7"
+lifecycle_version = "2.7.0"
+picasso_version = "2.71828"
+swiper_ref_lay = "1.1.0"
+okHttpVers = "4.9.1"
+pagging = "3.2.1"
+safeArgs = "2.7.7"
+
+[libraries]
+pagging = {group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "pagging"}
+interceptor = {group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttpVers"}
+okHttp = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttpVers"}
+swiperefreshlay = {group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiper_ref_lay"}
+picasso = {group = "com.squareup.picasso", name = "picasso", version.ref = "picasso_version"}
+view-model = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref ="lifecycle_version"}
+lifecycle = {group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycle_version"}
+navigation-fragment-ktx = {group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_vers"}
+navigation-ui-ktx = {group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "nav_vers"}
+coroutines = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines"}
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
+gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kapt = {id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
+safeArgs = {id = "androidx.navigation.safeargs", version.ref = "safeArgs"}
+

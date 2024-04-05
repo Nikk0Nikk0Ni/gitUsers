@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.niko.githubusers.R
 import com.niko.githubusers.databinding.FragmentDetailBinding
@@ -32,8 +33,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        observeInternetConnection()
         uploadUser()
         return binding.root
+    }
+
+    private fun observeInternetConnection() {
+        viewModel.isNetworkAvailable.observe(viewLifecycleOwner){
+            if (!it)
+                findNavController().navigate(R.id.action_detailFragment_to_errorFragment)
+        }
     }
 
     private fun uploadUser() {

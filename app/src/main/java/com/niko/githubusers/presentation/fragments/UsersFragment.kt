@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.niko.githubusers.R
@@ -25,13 +26,27 @@ class UsersFragment : Fragment(R.layout.fragment_users) {
         get() = _binding ?: throw RuntimeException("Fragment users == null")
     private val userAdapter = UserListAdapter()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updateUserList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
+        observeNetworkConnetcion()
         return binding.root
+    }
+
+    private fun observeNetworkConnetcion() {
+        viewModel.isNetworkAvailable.observe(viewLifecycleOwner){
+            if(!it){
+                findNavController().navigate(R.id.action_usersFragment_to_errorFragment)
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +80,14 @@ class UsersFragment : Fragment(R.layout.fragment_users) {
             findNavController().navigate(
                 UsersFragmentDirections.actionUsersFragmentToDetailFragment(
                     it.login
-                )
+                ), navOptions {
+                    anim {
+                        enter = androidx.navigation.ui.R.anim.nav_default_enter_anim
+                        popEnter = androidx.navigation.ui.R.anim.nav_default_pop_enter_anim
+                        exit = androidx.navigation.ui.R.anim.nav_default_exit_anim
+                        popExit = androidx.navigation.ui.R.anim.nav_default_pop_exit_anim
+                    }
+                }
             )
         }
         binding.userRecView.adapter = userAdapter

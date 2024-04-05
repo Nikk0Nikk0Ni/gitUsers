@@ -2,6 +2,7 @@ package com.niko.githubusers.presentation.viewModels
 
 import android.app.Application
 import android.net.ConnectivityManager
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,19 +32,12 @@ class UsersViewModel(private val application: Application) : ViewModel() {
         get() = _isNetworkAvailable
 
 
-    private fun checkConnection() {
+    private fun checkConnection(): Boolean {
         val connectivityManager =
             application.getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         _isNetworkAvailable.value = networkInfo != null && networkInfo.isConnected
-    }
-
-
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            uploadUserList.invoke()
-            _isLoading.postValue(true)
-        }
+        return isNetworkAvailable.value == true
     }
 
     fun getUsersList(): LiveData<List<User>> {
@@ -51,18 +45,21 @@ class UsersViewModel(private val application: Application) : ViewModel() {
     }
 
     fun uploadUserList() {
-        viewModelScope.launch {
-            uploadUserList.invoke()
-            _isLoading.postValue(true)
+        if (checkConnection()) {
+            viewModelScope.launch {
+                uploadUserList.invoke()
+                _isLoading.postValue(true)
+            }
         }
     }
 
     fun updateUserList() {
-        viewModelScope.launch {
-            updateUserList.invoke()
-            _isLoading.postValue(true)
+        if (checkConnection()) {
+            viewModelScope.launch {
+                updateUserList.invoke()
+                _isLoading.postValue(true)
+            }
         }
-
     }
 
     fun resetIsLoading() {

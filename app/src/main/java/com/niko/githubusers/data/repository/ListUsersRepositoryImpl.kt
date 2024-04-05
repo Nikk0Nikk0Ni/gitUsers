@@ -46,7 +46,6 @@ object ListUsersRepositoryImpl : ListUsersRepository {
             usersList.addAll(users_api.getUsersList(AMOUNT, from).body() ?: emptyList())
             listUsersLD.postValue(usersList.toList())
             from = usersList.last().id
-            Log.e("AUF","${users_api.getUsersList(AMOUNT, from).body()?.last()}")
         }
     }
 }

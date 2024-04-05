@@ -1,6 +1,8 @@
 package com.niko.githubusers.presentation.viewModels
 
 import android.app.Application
+import android.net.ConnectivityManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,15 +22,29 @@ class UserDetailViewModel(private val application: Application) : ViewModel() {
     val isEnd : LiveData<Boolean>
         get() = _isEnd
 
+    private var _isNetworkAvailable = MutableLiveData<Boolean>(false)
+    val isNetworkAvailable: LiveData<Boolean>
+        get() = _isNetworkAvailable
+
     fun getDetail() : LiveData<UserDetail>{
         return getDetailViewModel()
     }
 
     fun setDetail(name: String) {
-        viewModelScope.launch {
-            setDetail.invoke(name)
-            _isEnd.value = true
+        if(checkConnection()) {
+            viewModelScope.launch {
+                setDetail.invoke(name)
+                _isEnd.value = true
+            }
         }
+    }
+
+    private fun checkConnection(): Boolean {
+        val connectivityManager =
+            application.getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        _isNetworkAvailable.value = networkInfo != null && networkInfo.isConnected
+        return isNetworkAvailable.value == true
     }
 
 }

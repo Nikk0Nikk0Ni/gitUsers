@@ -11,6 +11,10 @@
         <action
             android:id="@+id/action_usersFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_usersFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -19,6 +23,10 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/errorFragment"

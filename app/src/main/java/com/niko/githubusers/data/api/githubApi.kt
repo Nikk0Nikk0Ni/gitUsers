@@ -14,17 +14,22 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val TOKEN = "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"
+/*
+Enter your git token into YOUR_TOKEN to receive more requests
+Remove commenting on two lines with tags @Headers
+ */
+const val YOUR_TOKEN = "..."
 interface githubApi {
 
-    @Headers("Authorization: token $TOKEN")
+
+//    @Headers("Authorization: token $YOUR_TOKEN")
     @GET("users")
     suspend fun getUsersList(
         @Query("per_page") amount: Int,
         @Query("since") from: Int
     ): Response<List<User>>
 
-    @Headers("Authorization: token $TOKEN")
+//    @Headers("Authorization: token $YOUR_TOKEN")
     @GET("users/{name}")
     suspend fun getUserDetail(@Path("name") name: String): Response<UserDetail>
 
